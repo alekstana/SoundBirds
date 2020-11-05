@@ -1,70 +1,196 @@
-# Getting Started with Create React App
+# Project Name
+SoundBirds
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Digital platform that matches people according to their taste in music.
 
-In the project directory, you can run:
+## User Stories
 
-### `npm start`
+-  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
+- **Landing** - As a user I want to be able to access the landing page so that I see what the app is about and be able to login or signup
+-  **Signup:** As a user I want to sign up on the webpage so that I can fill my profile and find matches according to my music taste
+-  **Login:** As a user I want to log in on the webpage so that I can see my dashboard, check incoming messages and find new matches according to my music taste
+- **/:user/dashboard** - As a user I want to see my selected playlist, add songs to my playlist, check incoming messages and find new matches according to my music taste
+- **/:user/dashboard/music-search** - As a user I want to be able to find my favourite artists and songs and add them to my selected playlist.
+- **/:user/dashboard/songbird-search**  - As a user I want to be able to see all people with similar music taste I have matched and saved into
+- **/:user/dashboard/songbird-squad**  - As a user I want to be able to find people with matching music taste.
+- **/:user/dashboard/:songbirdId**  - As a user I want to be able to see a playlist and a profile of a person with matching music taste
+- **/:user/mailbox**  - As a user I want to be able to see all people I have messaged or have messaged me.
+- **/:user/:messageId**  - As a user I want to be able to see conversation with one user and be able to send her/him a message.
+- **edit profile** - As a user I want to be able to edit mz profile to find new matches
+-  **Logout:** As a user I can logout from the platform so no one else can use it
+-  **Loading** As a user I can want to be enterntained while waiting
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Backlog
 
-### `npm test`
+- Introducing authetification with Spotify Account
+- Two users, logged in with their Spotofy accounts being able to make collaborative playlist in iFrame
+  
+# Client
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Routes
 
-### `npm run build`
+- /Landing
+- /auth/signup - Signup form
+- /auth/login - Login form
+- /:user/dashboard - dashboard
+- /:user/edit - Edit profile
+- /:user/dashboard/music-search - Look for music you like
+- /:user/dashboard/songbird-search - Look for people that match your playlist
+- /:user/dashboard/:songbirdId - Look at individual profile's and playlist of people that match your music taste
+- /:user/mailbox - See all messages you have received
+- /:user/messageId - See all messages you have received from one user
+- 404
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Pages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Landing Page (public)
+- Sign in Page (private)
+- Log in Page (private)
+- Edit Profile (private)
+- Dashboard (private)
+- Music Search (private)
+- Songbird Search (private)
+- Songbird Profile (private)
+- Mailbox (private)
+- Invidividual Mailbox (private)
+- 404 Page (public)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Components
 
-### `npm run eject`
+- Nav
+  - Input: restaurant: any
+  - Output: favorite(restaurantId: string, on: boolean)
+- Search component
+  - Output: change(terms: string)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## IO
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Services
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Auth Service
+  - auth.login(user)
+  - auth.signup(user)
+  - auth.logout()
+  - auth.me()
+  - auth.getUser() // synchronous
+- Find music
+  - artist.search()
+  - song.search()
+  - song.addFavorite(id)
+  - song.removeFavorite(id) 
+- Find match
+  - songbird.search()
+  - songbird.detail(id)
+  - songbird.addFavorite(id)
+  - songbird.removeFavorite(id) 
+- Messaging
+  - mailbox.all()
+  - message.detail(id)
+  - message.create(data)
+  - message.delete(id)
+  - songbird.addFavorite(id)
+  
 
-## Learn More
+# Server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Models
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+user model
 
-### Code Splitting
+```
+username - String // required
+email - String // required & unique
+password - String // required
+image - String // required
+lifemoto - String // max 140 characters
+mymusic - [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'music'}]
+},
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+music model
 
-### Analyzing the Bundle Size
+```
+artist - String // required
+track - String
+genre - String
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
+message model
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+body: String
+ receiver: {type: mongoose.Schema.Types.ObjectId
+ ref: 'user'}
+ sender: {type: mongoose.Schema.Types.ObjectId
+ ref: 'user'}
+```
 
-### Advanced Configuration
+## API Endpoints/Backend Routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- POST /auth/signup
+  - body:
+    - username
+    - email
+    - password
+    - imageUrl
+    - lifemoto
+- POST /auth/login
+  - body:
+    - username
+    - password
+- POST /auth/logout
+  - body: (empty)
+- POST /:userId/edit
+    - username
+    - email
+    - password
+    - imageUrl
+    - lifemoto
+- POST /:userId/music/edit
+    - mymusic
+- GET/:userId/music-search
+- GET/:userId/songbird-search
+- GET/:userId/songbirdId-profile 
+    - username
+    - imageUrl
+    - lifemoto
+    - mymusic
+- GET/:userId/mymessages
+- GET/:userId/:messageId
+- POST/:userId/:messageId
+- DELETE /:userId/mymusic
+  - body: (empty)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  
 
-### `npm run build` fails to minify
+## Links
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Wireframe
+
+https://www.figma.com/file/zMGVMB4YxT6jQuzI442w88/SoundBirds
+
+### Trello/Kanban
+
+https://trello.com/b/rOWAkfpp/soundbirds
+
+### Git
+
+https://github.com/alekstana/soundbirds-client/tree/master
+https://github.com/alekstana/soundbirds-server/tree/master
+
+[Deploy Link](http://heroku.com) ///tbd
+
+### Slides
+
+The url to your presentation slides
+
+https://trello.com/b/rOWAkfpp/soundbirds
