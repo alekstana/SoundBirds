@@ -61,10 +61,14 @@ Digital platform that matches people according to their taste in music.
 ## Components
 
 - Nav
-  - Input: restaurant: any
-  - Output: favorite(restaurantId: string, on: boolean)
-- Search component
-  - Output: change(terms: string)
+- Sign in form
+- Sign out form
+- Dashboard
+- Profile card
+- Playlist component
+- Music Track component
+- Mailbox list
+- Mailbox individual
 
 ## IO
 
@@ -180,7 +184,7 @@ https://www.figma.com/file/zMGVMB4YxT6jQuzI442w88/SoundBirds
 
 ### Trello/Kanban
 
-https://trello.com/b/rOWAkfpp/soundbirds
+https://trello.com/b/rOWAkfpp/soundbirds /// tbd
 
 ### Git
 
