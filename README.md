@@ -111,18 +111,20 @@ email - String // required & unique
 password - String // required
 image - String // required
 lifemoto - String // max 140 characters
-mymusic - [{
+myplaylist - [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'music'}]
+      ref: 'song'}]
 },
 
 ```
-music model
+song model
 
 ```
-artist - String // required
-track - String
+spotifyId: String
+artist: String
+name - String
 genre - String
+source - String
 
 ```
 
