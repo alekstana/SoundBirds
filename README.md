@@ -13,9 +13,9 @@ Digital platform that matches people according to their taste in music.
 -  **Login:** As a user I want to log in on the webpage so that I can see my dashboard, check incoming messages and find new matches according to my music taste
 - **/:user/dashboard** - As a user I want to see my selected playlist, add songs to my playlist, check incoming messages and find new matches according to my music taste
 - **/:user/dashboard/music-search** - As a user I want to be able to find my favourite artists and songs and add them to my selected playlist.
-- **/:user/dashboard/songbird-search**  - As a user I want to be able to see all people with similar music taste I have matched and saved into
-- **/:user/dashboard/songbird-squad**  - As a user I want to be able to find people with matching music taste.
-- **/:user/dashboard/:songbirdId**  - As a user I want to be able to see a playlist and a profile of a person with matching music taste
+- **/:user/dashboard/soundbird-search**  - As a user I want to be able to see all people with similar music taste I have matched and saved into
+- **/:user/dashboard/soundbird-squad**  - As a user I want to be able to find people with matching music taste.
+- **/:user/dashboard/:soundbirdId**  - As a user I want to be able to see a playlist and a profile of a person with matching music taste
 - **/:user/mailbox**  - As a user I want to be able to see all people I have messaged or have messaged me.
 - **/:user/:messageId**  - As a user I want to be able to see conversation with one user and be able to send her/him a message.
 - **edit profile** - As a user I want to be able to edit mz profile to find new matches
@@ -38,8 +38,8 @@ Digital platform that matches people according to their taste in music.
 - /:user/dashboard - dashboard
 - /:user/edit - Edit profile
 - /:user/dashboard/music-search - Look for music you like
-- /:user/dashboard/songbird-search - Look for people that match your playlist
-- /:user/dashboard/:songbirdId - Look at individual profile's and playlist of people that match your music taste
+- /:user/dashboard/soundbird-search - Look for people that match your playlist
+- /:user/dashboard/:soundbird - Look at individual profile's and playlist of people that match your music taste
 - /:user/mailbox - See all messages you have received
 - /:user/messageId - See all messages you have received from one user
 - 404
@@ -87,16 +87,15 @@ Digital platform that matches people according to their taste in music.
   - song.addFavorite(id)
   - song.removeFavorite(id) 
 - Find match
-  - songbird.search()
-  - songbird.detail(id)
-  - songbird.addFavorite(id)
-  - songbird.removeFavorite(id) 
+  - soundbird.search()
+  - soundbird.addFavorite(id)
+  - soundbird.removeFavorite(id) 
 - Messaging
   - mailbox.all()
   - message.detail(id)
   - message.create(data)
   - message.delete(id)
-  - songbird.addFavorite(id)
+  - soundbird.addFavorite(id)
   
 
 # Server
@@ -106,11 +105,15 @@ Digital platform that matches people according to their taste in music.
 user model
 
 ```
-username - String // required
+_id: String
+name - String // required
 email - String // required & unique
 password - String // required
 image - String // required
-lifemoto - String // max 140 characters
+soundbirdId - [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'}]
+},
 myplaylist - [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'song'}]
@@ -125,6 +128,7 @@ artist: String
 name - String
 genre - String
 source - String
+imageUrl: String
 
 ```
 
