@@ -2,6 +2,8 @@ import {API_URL} from './config'
 import React, { Component } from 'react'
 import axios from 'axios'
 import {Switch , Route, withRouter} from 'react-router-dom'
+import './App.css';
+
 
 //// -----import all components here----- ////
 import MyNav from './components/MyNav'
@@ -10,7 +12,9 @@ import LandingPage from './components/LandingPage'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 import Dashboard from './components/Dashboard'
-import MusicSearch from './components/MusicSearch'
+import CreatePlaylist from './components/CreatePlaylist'
+import ArtistDetail from './components/ArtistDetail'
+import TracksDetail from './components/TracksDetail'
 
 
 //// ------------------------------------ ////
@@ -22,9 +26,27 @@ class App extends Component {
 
   state = {
     loggedInUser: null,
-    errorMessage: null
+    errorMessage: null,
+    myArtists: [],
+    myTracks: [],
+    singleArtist: []
   }
 
+  componentDidMount() {
+    if (!this.state.loggedInUser) {
+        axios.get(`${API_URL}/user`, {withCredentials: true})
+        .then((response) => {
+          this.setState({
+            loggedInUser:response.data
+          })
+        })
+        .catch((error) => {
+          this.setState({
+            errorMessage:error.response.data
+          })
+        })
+    }
+  }
 
 
   handleSignUp = (event) => {
@@ -76,10 +98,9 @@ class App extends Component {
 
   handleLogOut = (e) => {
     e.preventDefault()
-    console.log("hello")
     axios.post(`${API_URL}/logout`, {}, {withCredentials: true})
       .then(() => {
-        console.log("loging out")
+        // console.log("loging out")
         this.setState({
           loggedInUser: null
         }, () => {
@@ -91,32 +112,52 @@ class App extends Component {
 
 
 
-  handleArtistSearch = (e) => {
+  handleMusicSearch = (e, context) => {
     e.preventDefault()
-    console.log(e.target.name.value)
     let name = e.target.name.value;
-    axios.post(`${API_URL}/artist-search`, {name})
-    .then((response) => {
-      console.log("data send")
-      console.log(response)
+    console.log(context)
+    console.log(name)
+    axios.post(`${API_URL}/music-search`, {name, context})
+      .then((response) => {
+        let tracks = response.data.body.tracks.items
+        console.log(response.data.body.tracks.items)
+        this.setState({
+          myArtists: response.data,
+          myTracks: response.data.body.tracks.items
+        },() => {
+          this.props.history.push(`/find-tracks`)
+        })
     })
+      .catch((err) =>{
+        console.log(err)
+      })
   }
 
 
 
-
+  handleSelectTrack = (artistId) => {
+    console.log(`track selected ${artistId}`)
+    // axios.get(`${API_URL}/find-tracks/${artistId}`)
+    // .then((response) => {
+    //   console.log(response)
+    //   this.setState({
+    //     singleArtist: response.data
+    //   })
+    // })
+  }
 
 
   render() {
 
-    const { loggedInUser } = this.state
+    const { loggedInUser, myArtists } = this.state
 
     return (
-      <div>
+      <div >
+      <div className="container-body">
           <div>
              <MyNav loggedInUser={loggedInUser} onLogout={this.handleLogOut}/>
           </div>
-          <div>
+          <div className="mdc-layout-grid" className="container">
              <Switch>
                   <Route exact path="/" component={LandingPage}/>
                   <Route path="/signup" render={(routeProps) => {
@@ -130,15 +171,27 @@ class App extends Component {
                     return <Dashboard loggedInUser={loggedInUser} {...routeProps}/>
                   }}/>
 
-                  <Route path="/create-playlist" render={(routeProps) => {
-                    return <MusicSearch loggedInUser={loggedInUser} onArtistSearch={this.handleArtistSearch} {...routeProps}/>
+                  <Route exact path="/create-playlist" render={(routeProps) => {
+                    return <CreatePlaylist loggedInUser={loggedInUser} onMusicSearch={this.handleMusicSearch} myArtists={this.state.myArtists} {...routeProps}/>
                   }}/>
+                  <Route path="/create-playlist/:artistName" render={(routeProps) => {
+                    return <ArtistDetail loggedInUser={loggedInUser} myArtists={this.state.myArtists} {...routeProps}/>
+                  }}/>
+
+                  <Route path="/find-tracks" render={(routeProps) => {
+                    return <TracksDetail loggedInUser={loggedInUser} myTracks={this.state.myTracks} {...routeProps}/>
+                  }}/>
+
 
              </Switch>
 
 
-          </div>
+             
 
+
+          </div>
+         </div>
+          <footer class="footer"> ♩ ♪ ♫ ♬</footer>
 
       </div>
     )

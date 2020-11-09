@@ -2,22 +2,35 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-function MyNav(props) {
-    return (
-        <div>
-        <Link to="/">SoundBirds Logo</Link>
 
+
+function MyNav(props) {
+
+
+    
+    return (
+        <div className="nav">
+        <div className="nav-container">
+
+        
+        <Link to="/">
+        <img style={{height: "50px"}}src="/images/Soundbird.jpg"/>
+        </Link>
+                    <div className="nav-btn-container">
 
         {
                         props.loggedInUser ? (
-                            <button onClick={props.onLogout}>Logout</button>
+                            <button onClick={props.onLogout} className="btn-outline">Logout</button>
                         ) : (
                             <>
-                            <Link to="/signin"><button>Sign In</button></Link>
-                            <Link to="/signup"><button>Sign Up</button></Link>
+                            <Link to="/signin"><button className="btn-outline">Sign In</button></Link>
+                            <Link to="/signup"><button className="btn-outline">Sign Up</button></Link>
                             </>
                         )
                     }
+                    </div>
+
+            </div>
         </div>
     )
 }

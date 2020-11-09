@@ -12,9 +12,9 @@ class Dashboard extends Component {
        } 
         return (
             <div>
-                <h1>Welcome to your dashboard, {loggedInUser.name}!</h1>
+                <h2>Welcome to your dashboard, {loggedInUser.name}!</h2>
                 <p>More songs - more possibility to find a perfect match.</p>
-                <button><Link to="/create-playlist">Create a playlist</Link></button>
+                <Link to="/create-playlist" className="btn-filled" style={{textDecoration:'none'}}>Create a playlist</Link>
             </div>
         )
     }
