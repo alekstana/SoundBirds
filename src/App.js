@@ -13,8 +13,9 @@ import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 import Dashboard from './components/Dashboard'
 import CreatePlaylist from './components/CreatePlaylist'
-import ArtistDetail from './components/ArtistDetail'
 import TracksDetail from './components/TracksDetail'
+import ShowPlaylist from './components/ShowPlaylist'
+import MySoundbirds from './components/MySoundbirds'
 
 
 //// ------------------------------------ ////
@@ -29,7 +30,7 @@ class App extends Component {
     errorMessage: null,
     myArtists: [],
     myTracks: [],
-    singleArtist: []
+    myPlaylist: []
   }
 
   componentDidMount() {
@@ -111,7 +112,7 @@ class App extends Component {
   }
 
 
-
+// Search for Music
   handleMusicSearch = (e, context) => {
     e.preventDefault()
     let name = e.target.name.value;
@@ -122,10 +123,8 @@ class App extends Component {
         let tracks = response.data.body.tracks.items
         console.log(response.data.body.tracks.items)
         this.setState({
-          myArtists: response.data,
+          // myArtists: response.data,
           myTracks: response.data.body.tracks.items
-        },() => {
-          this.props.history.push(`/find-tracks`)
         })
     })
       .catch((err) =>{
@@ -134,17 +133,17 @@ class App extends Component {
   }
 
 
-
-  handleSelectTrack = (artistId) => {
-    console.log(`track selected ${artistId}`)
-    // axios.get(`${API_URL}/find-tracks/${artistId}`)
-    // .then((response) => {
-    //   console.log(response)
-    //   this.setState({
-    //     singleArtist: response.data
-    //   })
-    // })
+/// add Tracks to your playlist 
+  handleSelectTrack = (track) => {
+    console.log(`track selected ${track.id}`)
+    axios.post(`${API_URL}/add-track`, {track}, {withCredentials:true} )
+    .then((response) => {
+      console.log(response)
+//////implement a visual element - so the user can see that he/she added the song
+    })
   }
+
+
 
 
   render() {
@@ -168,19 +167,22 @@ class App extends Component {
                   }}/>
 
                   <Route path="/dashboard" render={(routeProps) => {
-                    return <Dashboard loggedInUser={loggedInUser} {...routeProps}/>
+                    return <Dashboard loggedInUser={loggedInUser} onShowPlaylist={this.handleShowPlaylist} {...routeProps}/>
                   }}/>
 
                   <Route exact path="/create-playlist" render={(routeProps) => {
-                    return <CreatePlaylist loggedInUser={loggedInUser} onMusicSearch={this.handleMusicSearch} myArtists={this.state.myArtists} {...routeProps}/>
-                  }}/>
-                  <Route path="/create-playlist/:artistName" render={(routeProps) => {
-                    return <ArtistDetail loggedInUser={loggedInUser} myArtists={this.state.myArtists} {...routeProps}/>
+                    return <CreatePlaylist loggedInUser={loggedInUser} onMusicSearch={this.handleMusicSearch} myArtists={this.state.myArtists} myTracks={this.state.myTracks} onSelectTrack={this.handleSelectTrack} {...routeProps}/>
                   }}/>
 
-                  <Route path="/find-tracks" render={(routeProps) => {
-                    return <TracksDetail loggedInUser={loggedInUser} myTracks={this.state.myTracks} {...routeProps}/>
-                  }}/>
+
+                  <Route path="/myplaylist" render={(routeProps) => {
+                    return <ShowPlaylist loggedInUser={loggedInUser}  onShowPlaylist={this.handleShowPlaylist} myPlaylist={this.state.myPlaylist} {...routeProps}/>
+                  }}/>     
+
+
+                  <Route path="/find-soundbird" render={(routeProps) => {
+                    return <MySoundbirds loggedInUser={loggedInUser}  {...routeProps}/>
+                  }}/>    
 
 
              </Switch>

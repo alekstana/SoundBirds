@@ -1,4 +1,4 @@
-@use "@material/layout-grid/mdc-layout-grid";
+/* @use "@material/layout-grid/mdc-layout-grid";
 @use "@material/button";
 
 
@@ -7,7 +7,7 @@
 @use "@material/notched-outline/mdc-notched-outline";
 @use "@material/textfield";
 
-@include textfield.core-styles;
+@include textfield.core-styles; */
 
 /* body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -57,7 +57,7 @@
  }
 
  .container{
-   margin-top: 100px;
+   margin: 100px 0;
  }
 
  .mini-container{

@@ -1,17 +1,17 @@
-import React , {useState} from "react";
-import ArtistDetail from "./ArtistDetail";
+import React, { useState } from "react";
+
 
 function ArtistSearch(props) {
-
-  const [context, setContext] = useState(null)
+  const [context, setContext] = useState(null);
 
   const onContextChange = (e) => {
-    setContext(e.target.value)
-  }
+    setContext(e.target.value);
+  };
 
   return (
     <form onSubmit={(e) => props.onMusicSearch(e, context)}>
-      <div>
+     
+      <div >
         <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label">
           <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
@@ -26,21 +26,34 @@ function ArtistSearch(props) {
             placeholder="Find your favourite artist"
           />
         </label>
-        <input onChange={onContextChange} type="checkbox" name="context" value="artist"/>
-        <label > Artists</label>
-        <input onChange={onContextChange} type="checkbox"  name="context" value="track"/>
-        <label > Tracks</label>
-        <input onChange={onContextChange} type="checkbox"  name="context" value="all"/>
-        <label > All</label>
+        <input
+          onChange={onContextChange}
+          type="checkbox"
+          name="context"
+          value="artist"
+        />
+        <label> Artists</label>
+        <input
+          onChange={onContextChange}
+          type="checkbox"
+          name="context"
+          value="track"
+        />
+        <label> Tracks</label>
+        <input
+          onChange={onContextChange}
+          type="checkbox"
+          name="context"
+          value="all"
+        />
+        <label> All</label>
       </div>
       <div className="mini-container">
-      <button type="submit" className="btn-filled ">
-        Search
-      </button>
+        <button type="submit" className="btn-filled ">
+          Search
+        </button>
       </div>
     </form>
-
-
   );
 }
 
