@@ -113,6 +113,13 @@ class App extends Component {
 
 
 // Search for Music
+
+  handleNullifyTracks = () => {
+    this.setState({
+      myTracks: null,
+    })
+  }
+
   handleMusicSearch = (e, context) => {
     e.preventDefault()
     let name = e.target.name.value;
@@ -123,7 +130,6 @@ class App extends Component {
         let tracks = response.data.body.tracks.items
         console.log(response.data.body.tracks.items)
         this.setState({
-          // myArtists: response.data,
           myTracks: response.data.body.tracks.items
         })
     })
@@ -171,7 +177,7 @@ class App extends Component {
                   }}/>
 
                   <Route exact path="/create-playlist" render={(routeProps) => {
-                    return <CreatePlaylist loggedInUser={loggedInUser} onMusicSearch={this.handleMusicSearch} myArtists={this.state.myArtists} myTracks={this.state.myTracks} onSelectTrack={this.handleSelectTrack} {...routeProps}/>
+                    return <CreatePlaylist loggedInUser={loggedInUser} onMusicSearch={this.handleMusicSearch} myArtists={this.state.myArtists} myTracks={this.state.myTracks} onSelectTrack={this.handleSelectTrack} onNullifyTracks={this.handleNullifyTracks} {...routeProps}/>
                   }}/>
 
 

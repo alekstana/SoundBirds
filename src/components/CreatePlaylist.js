@@ -6,6 +6,11 @@ import TracksDetail from './TracksDetail'
 
 class CreatePlaylist extends Component {
 
+  
+
+  componentDidMount() {
+    this.props.onNullifyTracks();
+  }
 
 
   render() {
