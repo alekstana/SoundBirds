@@ -19,6 +19,7 @@ function SignUp(props) {
     //   </form>
 
     <form onSubmit={props.onSignUp} >
+    <h2>Sign Up!</h2>
       <div className="mini-container">
         <label class="mdc-text-field mdc-text-field--filled mdc-text-field--no-label" >
           <span class="mdc-text-field__ripple"></span>

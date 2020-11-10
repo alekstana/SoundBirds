@@ -16,7 +16,8 @@ import CreatePlaylist from './components/CreatePlaylist'
 import TracksDetail from './components/TracksDetail'
 import ShowPlaylist from './components/ShowPlaylist'
 import MySoundbirds from './components/MySoundbirds'
-
+import EditProfile from './components/EditProfile'
+import SoundbirdPlaylist from './components/SoundbirdPlaylist'
 
 //// ------------------------------------ ////
 
@@ -30,7 +31,8 @@ class App extends Component {
     errorMessage: null,
     myArtists: [],
     myTracks: [],
-    myPlaylist: []
+    myPlaylist: [],
+    myMessages:[]
   }
 
   componentDidMount() {
@@ -150,6 +152,41 @@ class App extends Component {
   }
 
 
+///// Edit User Profile
+
+handleEditProfile = (event) => {
+  event.preventDefault()
+  const {name, aboutMe, image} = event.target
+  let imageFile = image.files[0]
+  let uploadForm = new FormData()
+  uploadForm.append('imageUrl', imageFile)
+  
+ 
+    ///upload from the server
+    axios.post(`${API_URL}/upload`, uploadForm)
+      .then((response) => {
+    
+        axios.post(`${API_URL}/edit-profile`, {
+          name: name.value,
+          aboutMe: aboutMe.value,
+          imageUrl: response.data.image
+        }, {withCredentials:true})
+        .then((response) =>{
+          console.log(response)
+            this.setState({
+              loggedInUser:response.data
+            }, () => {
+              this.props.history.push('/dashboard')
+            })      
+        })
+         .catch((err) => {
+           console.log("could not update a user")
+         })
+      })
+    }
+
+
+
 
 
   render() {
@@ -164,7 +201,11 @@ class App extends Component {
           </div>
           <div className="mdc-layout-grid" className="container">
              <Switch>
-                  <Route exact path="/" component={LandingPage}/>
+                  {/* <Route exact path="/" component={LandingPage}/> */}
+                  <Route exact path="/" render={(routeProps) => {
+                    return <LandingPage loggedInUser={loggedInUser} {...routeProps}/>
+                  }}/>
+
                   <Route path="/signup" render={(routeProps) => {
                     return <SignUp onSignUp={this.handleSignUp} {...routeProps}/>
                   }}/>
@@ -190,6 +231,14 @@ class App extends Component {
                     return <MySoundbirds loggedInUser={loggedInUser}  {...routeProps}/>
                   }}/>    
 
+                  <Route path="/edit-profile" render={(routeProps) => {
+                    return <EditProfile loggedInUser={loggedInUser} onEditProfile={this.handleEditProfile} {...routeProps}/>
+                  }}/> 
+
+
+                  <Route path="/soundbird-playlist" render={(routeProps) => {
+                    return <SoundbirdPlaylist loggedInUser={loggedInUser}  {...routeProps}/>
+                  }}/> 
 
              </Switch>
 

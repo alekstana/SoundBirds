@@ -1,17 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function LandingPage() {
+function LandingPage(props) {
     return (
         <div className="container">
-            <Link className="btn-outline-bottom" to="/dashboard" style={{textDecoration:'none'}}> To the Dashboard</Link>
 
             <h1>Hello SoundBirds,<br></br> let’s stick together!</h1>
             {/* <div className="rectangle"> </div> */}
-            <p>Soundbirds is a digital platform that connects people around the world accoding to their taste of music.</p>
-            {/* <button><Link to="signup">Sign up</Link></button> */}
+            <p>Soundbirds is a digital platform that connects people around the world according to their taste of music.</p>
+            <p>Why? Because meeting someone with the same taste of music is seriously the best thing ever.</p>
 
-            <Link to="/signup"><button className="btn-filled">let's get started </button></Link>
+
+            {
+                        props.loggedInUser ? (
+                            <Link className="btn-filled" to="/dashboard" style={{textDecoration:'none'}}> To the Dashboard</Link>
+                        ) : (
+                            <>
+                            <Link to="/signup"><button className="btn-filled">Let's get Started</button></Link>
+                            </>
+                        )
+                    }
         </div>
     )
 }

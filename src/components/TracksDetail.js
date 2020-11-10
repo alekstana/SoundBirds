@@ -8,16 +8,16 @@ class TracksDetail extends Component {
 
     return (
       <div>
-        {/* <h5>Select tracks</h5>  */}
         {myTracks &&
           myTracks.map((track) => {
             console.log(track);
             return (
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <p key={track.id}>
-                  <h4>{track.name}</h4>
-                  <p>{track.artists[0].name}</p>
-
+              <div>
+                <div key={track.id} style={{ display: "flex", flexDirection: "row", paddingBottom: "40px" , borderBottom: "solid 1px grey", justifyContent:"space-between", alignItems: "center"}}>
+                  <div style={{ width: "200px"}}>
+                    <h4>{track.name}</h4>
+                    <p>{track.artists[0].name}</p>
+                  </div>
                   <figure>
                     <figcaption></figcaption>
                     <audio controls src={track.preview_url}>
@@ -26,23 +26,25 @@ class TracksDetail extends Component {
                     </audio>
                   </figure>
 
-                  <button
-                    className="btn-filled"
-                    onClick={() => {
-                      onSelectTrack(track);
-                    }}
-                  >
-                    Add to my playlist
-                  </button>
-                </p>
+                  {track.album.images.length ? (
+                    <img
+                      key={track.id}
+                      src={track.album.images[0].url}
+                      style={{ width: "100px" }}
+                    />
+                  ) : null}
 
-                {track.album.images.length ? (
-                  <img
-                    key={track.id}
-                    src={track.album.images[0].url}
-                    style={{ width: "100px" }}
-                  />
-                ) : null}
+                  <div>
+                    <button
+                      className="btn-filled"
+                      onClick={() => {
+                        onSelectTrack(track);
+                      }}
+                    >
+                      + Add to my playlist
+                    </button>
+                  </div>
+                </div>
               </div>
             );
           })}

@@ -12,7 +12,6 @@ class CreatePlaylist extends Component {
     this.props.onNullifyTracks();
   }
 
-
   render() {
     let { loggedInUser, myArtists, onMusicSearch, myTracks , onSelectTrack} = this.props;
 
@@ -25,7 +24,7 @@ class CreatePlaylist extends Component {
         <Link className="btn-outline-bottom" to="/dashboard" style={{textDecoration:'none'}}> To the Dashboard</Link>
         <h2>Find your favourite music, {loggedInUser.name}!</h2>
         <ArtistSearch onMusicSearch={onMusicSearch} loggedInUser={loggedInUser} myArtists={myArtists}/>
-        <hr></hr>
+        
         <TracksDetail loggedInUser={loggedInUser} onSelectTrack={onSelectTrack} myTracks={myTracks}/>
 
       </div>

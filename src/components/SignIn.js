@@ -6,6 +6,7 @@ function SignIn(props) {
 
   return (
     <form onSubmit={props.onSignIn}>
+    <h2>Welcome back. Sign in! </h2>
       <div className="mini-container">
         <label class="mdc-text-field mdc-text-field--filled mdc-text-field--no-label">
           <span class="mdc-text-field__ripple"></span>

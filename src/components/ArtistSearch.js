@@ -11,7 +11,7 @@ function ArtistSearch(props) {
   return (
     <form onSubmit={(e) => props.onMusicSearch(e, context)}>
      
-      <div >
+      <div style={{ display: "flex", flexDirection: "row", paddingBottom: "40px", paddingRight: "100px", borderBottom: "solid 1px grey", alignItems: "center", justifyContent: "space-around" }}>
         <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label">
           <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
@@ -47,12 +47,13 @@ function ArtistSearch(props) {
           value="all"
         />
         <label> All</label>
-      </div>
-      <div className="mini-container">
         <button type="submit" className="btn-filled ">
           Search
         </button>
       </div>
+      
+
+      
     </form>
   );
 }
