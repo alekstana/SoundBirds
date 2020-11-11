@@ -55,7 +55,7 @@ class ShowPlaylist extends Component {
           to="/dashboard"
           style={{ textDecoration: "none" }}
         >
-          {" "}
+        
           To the Dashboard
         </Link>
 

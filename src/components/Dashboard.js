@@ -43,7 +43,7 @@ class Dashboard extends Component {
                     }
             
 
-                    <Link className="btn-outline-bottom" to="/edit-profile" style={{textDecoration:'none'}}> >> Edit profile</Link>
+                    <Link className="btn-outline-bottom" to="/edit-profile" style={{textDecoration:'none'}}> Edit profile</Link>
         </div>
 
                

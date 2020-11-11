@@ -8,6 +8,8 @@ class SoundbirdPlaylist extends Component {
   state = {
     myMatch: null,
     matchPlaylist: [],
+    addButton: "add to my playlist",
+    addedButton: "added",
   };
 
   componentDidMount() {
@@ -17,6 +19,13 @@ class SoundbirdPlaylist extends Component {
       myMatch: selectedMatch,
     });
   }
+
+  // handleAddedButton(e){
+  //   e.preventDefault()
+  //   this.setState({
+  //     addButton: this.state.addedButton
+  //   })
+  // }
 
   handleMatchPlaylist = (match) => {
     axios
@@ -39,6 +48,7 @@ class SoundbirdPlaylist extends Component {
 
   handleAddToMyPlaylist = (songId) => {
     console.log(songId)
+
     axios
         .post(
         `${API_URL}/add-matchsong-to-myplaylist`,
@@ -47,6 +57,10 @@ class SoundbirdPlaylist extends Component {
         )
         .then(()=>{
             console.log("song added to my playlist");
+            // this.setState({
+            //   addButton: this.state.addedButton
+            // })
+
         })
         .catch((err) => {
             console.log("couldn't fetch the playlist", err);
@@ -65,6 +79,7 @@ class SoundbirdPlaylist extends Component {
 
     const { myMatch, matchPlaylist } = this.state;
     console.log(this.state.myMatch.name);
+    // console.log(this.state.myMatch._id);
     return (
       <div>
               <Link
@@ -113,7 +128,7 @@ class SoundbirdPlaylist extends Component {
                 </div>
 
                 <div>
-                  <button onClick={() => {this.handleAddToMyPlaylist(song._id)}}  className="btn-outline">add to my playlist</button>
+                  <button onClick={() => {this.handleAddToMyPlaylist(song._id)}} className="btn-outline">{this.state.addButton}</button>
                 </div>
 
               </div>

@@ -100,10 +100,13 @@ class MySoundbirds extends Component {
                     className="btn-outline"
                     style={{ textDecoration: "none" }}
                   >
-                    {" "}
+                    
                     ♩ See {match.name}'s playlist
                   </Link>
-                  <button className="btn-filled"> Say Hello</button>
+
+
+
+                  <Link to={{ pathname: "/messenger", state: { selectedMatch: match },}} className="btn-filled" style={{ textDecoration: "none" }}> Say Hello </Link>
                 </p>
               </div>
             );

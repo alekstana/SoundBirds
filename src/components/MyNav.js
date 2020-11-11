@@ -20,9 +20,14 @@ function MyNav(props) {
 
         {
                         props.loggedInUser ? (
+                            <>
+                            <Link to="/mailbox"><button className="btn-outline"> ✉ Mailbox</button></Link>
                             <button onClick={props.onLogout} className="btn-outline">Logout</button>
+                            </>
+                            
                         ) : (
                             <>
+                            
                             <Link to="/signin"><button className="btn-outline">Sign In</button></Link>
                             <Link to="/signup"><button className="btn-outline">Sign Up</button></Link>
                             </>

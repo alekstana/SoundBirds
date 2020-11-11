@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Switch , Route, withRouter} from 'react-router-dom'
 import './App.css';
+import io from "socket.io-client";
 
 
 //// -----import all components here----- ////
@@ -18,6 +19,8 @@ import ShowPlaylist from './components/ShowPlaylist'
 import MySoundbirds from './components/MySoundbirds'
 import EditProfile from './components/EditProfile'
 import SoundbirdPlaylist from './components/SoundbirdPlaylist'
+import Messenger from './components/Messenger'
+import Mailbox from './components/Mailbox'
 
 //// ------------------------------------ ////
 
@@ -32,7 +35,8 @@ class App extends Component {
     myArtists: [],
     myTracks: [],
     myPlaylist: [],
-    myMessages:[]
+    myMessages:[],
+    
   }
 
   componentDidMount() {
@@ -238,6 +242,9 @@ handleEditProfile = (event) => {
 
                   <Route path="/soundbird-playlist" render={(routeProps) => {
                     return <SoundbirdPlaylist loggedInUser={loggedInUser}  {...routeProps}/>
+                  }}/> 
+                  <Route path="/messenger" render={(routeProps) => {
+                    return <Messenger loggedInUser={loggedInUser}  {...routeProps}/>
                   }}/> 
 
              </Switch>
