@@ -105,6 +105,7 @@ class SoundbirdPlaylist extends Component {
                 height: "400px",
                 overflow: "hidden",
                 position: "relative",
+                marginBottom: "70px"
               }}
             >
               <img
@@ -119,7 +120,7 @@ class SoundbirdPlaylist extends Component {
           ) : null}
         </div>
 
-        <hr></hr>
+        {/* <hr></hr> */}
         {matchPlaylist &&
           matchPlaylist.map((song) => {
             return (
@@ -160,9 +161,9 @@ class SoundbirdPlaylist extends Component {
                     onClick={() => {
                       this.handleAddToMyPlaylist(song);
                     }}
-                    className="btn-outline"
+                    className="btn-outline2"
                   >
-                    {this.state.addButton}
+                    add to  my playlist
                   </button>
                 </div>
               </div>

@@ -247,6 +247,10 @@ handleEditProfile = (event) => {
                     return <Messenger loggedInUser={loggedInUser}  {...routeProps}/>
                   }}/> 
 
+                  <Route path="/mailbox" render={(routeProps) => {
+                    return <Mailbox loggedInUser={loggedInUser}  {...routeProps}/>
+                  }}/> 
+
              </Switch>
 
 

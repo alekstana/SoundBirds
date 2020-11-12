@@ -142,6 +142,60 @@
 
 
 
+.btn-outline2{
+  border: solid #6200EE 3px;
+  content:'add to my Playlist';
+  background-color: white;
+  border-radius: 5px;
+  padding: 7px 14px;
+  margin-right: 10px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 11pt;
+  color: #6200EE;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+
+
+.btn-outline2:active{
+ border: solid #6200EE 3px;
+ content:'added';
+ background-color: #6200EE;
+ border-radius: 5px;
+ padding: 7px 14px;
+ margin-right: 10px;
+ font-family: 'Work Sans', sans-serif;
+ font-weight: 500;
+ font-size: 11pt;
+ color: white;
+ text-transform: uppercase;
+ letter-spacing: 0.06em;
+}
+
+
+
+.btn-outline2:active:after {
+  border: solid #6200EE 3px;
+  content:'added';
+  background-color: #6200EE;
+  border-radius: 5px;
+  padding: 7px 14px;
+  margin-right: 10px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 11pt;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+ }
+
+
+
+
+
+
 .btn-filled {
   border: solid #6200EE 3px;
   background-color: #6200EE;
@@ -246,3 +300,26 @@
   position: relative;
   height: 400px
 } */
+
+
+.input-chat{
+  height: 100px;
+  weight:200px;
+  padding:50px;
+}
+
+.chatContainer{
+
+  height: 350px;
+  overflow-y: scroll;
+  /* background-color: lightgrey; */
+  padding: 20px 40px 20px 20px;
+  border: solid 1px lightgray;
+}
+
+.chat {
+  /* height: 100px; */
+  width:500px;
+  /* padding:20px; */
+  /* margin-right: 300px; */
+}
