@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 class ShowPlaylist extends Component {
   state = {
     myPlaylist: [],
+    myProfile: null
   };
 
   handleShowPlaylist = () => {
@@ -40,31 +41,44 @@ class ShowPlaylist extends Component {
 
   componentDidMount() {
     this.handleShowPlaylist();
+    this.setState({
+      myProfile: this.props.loggedInUser
+    })
   }
 
 
 
   render() {
     const { myPlaylist } = this.state;
-    console.log(myPlaylist);
+    console.log(this.props.loggedInUser);
 
     return (
+      <div>
       <div>
         <Link
           className="btn-outline-bottom"
           to="/dashboard"
-          style={{ textDecoration: "none" }}
+          style={{ textDecoration: "none", marginBottom: "50px" }}
         >
         
           To the Dashboard
         </Link>
+     </div>
+     {/* {this.props.loggedInUser ?  (
+      <div style={{height: "300px", overflow: "hidden", position: "relative",  display: "flex", alignContent: "center"}}>
+       <img src={this.props.loggedInUser.imageUrl} style={{width: "100%", position: "absolute", marginTop: "-600px"}}/>
+
+     </div>
+     ) : null
+
+     } */}
 
         <h2>My Playlist</h2>
         <hr></hr>
         {myPlaylist &&
           myPlaylist.map((song) => {
             return (
-              <div style={{ display: "flex", flexDirection: "row", paddingBottom: "40px" , borderBottom: "solid 1px grey", justifyContent:"space-between", alignItems: "center"}}>
+              <div style={{ display: "flex", flexDirection: "row", paddingBottom: "40px" , borderBottom: "solid 1px grey", justifyContent:"space-between", alignItems: "center", flexWrap: "wrap"}}>
                 <div key={song.id} style={{ width: "200px"}}>
                   <h3>{song.name}</h3>
                   <p>{song.artist}</p>

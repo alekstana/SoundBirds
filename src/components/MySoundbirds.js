@@ -33,6 +33,8 @@ class MySoundbirds extends Component {
     this.handleShowMatches();
   }
 
+
+
   render() {
     const { myMatches } = this.state;
 
@@ -54,60 +56,79 @@ class MySoundbirds extends Component {
             return (
               <div
                 key={match.id}
-                style={{ display: "flex", flexDirection: "column" }}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  border: "solid 1px #6200ee",
+                  padding: "30px",
+                  margin: "15px",
+                  borderColor: "linear-gradient(to right,white, #6200ee)",
+              
+                }}
               >
-                <p>
-                  <div
-                    style={{
-                      diplay: "flex",
-                      alignItems: "center",
-                      paddingTop: "90px",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {match.imageUrl ? (
-                      <div className="image-container">
-                        <img
-                          className="image"
-                          src={match.imageUrl}
-                          alt="profile image"
-                        />
-                      </div>
-                    ) : (
-                      <object
-                        className="image-container"
-                        data="/images/Avatar.jpg"
-                        type="image/png"
-                      >
-                        <img
-                          className="image"
-                          src={match.imageUrl}
-                          alt="profile image"
-                        />
-                      </object>
-                    )}
+                <div style={{ paddingRight: "20px" }}>
+                  {match.imageUrl ? (
+                    <div className="image-container2">
+                      <img
+                        className="image2"
+                        src={match.imageUrl}
+                        alt="profile image"
+                      />
+                    </div>
+                  ) : (
+                    <object
+                      className="image-container2"
+                      data="/images/Avatar.jpg"
+                      type="image/png"
+                    >
+                      <img
+                        className="image2"
+                        src={match.imageUrl}
+                        alt="profile image"
+                      />
+                    </object>
+                  )}
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexWarp: "wrap",
+                    alignContent: "center",
+                  }}
+                >
+                  <div>
+                    <h3>{match.name} ♩</h3>
+                    <div style={{ fontStyle: "italic", paddingBottom: "10px" }}>
+                      {match.aboutMe ? match.aboutMe : null}
+                    </div>
+                          <div style={{display: "flex", flexWarp: "wrap", padding: "10px 0px"}}>
+                          <Link
+                            to={{
+                              pathname: "/soundbird-playlist/",
+                              state: { selectedMatch: match },
+                            }}
+                            className="btn-outline"
+                            style={{ textDecoration: "none" }}
+                          >
+                             See {match.name}'s playlist
+                          </Link>
+
+                          <Link
+                            to={{
+                              pathname: `/messenger`,
+                              state: { selectedMatch: match },
+                            }}
+                            className="btn-filled"
+                            style={{ textDecoration: "none" }}
+                          >
+                            {" "}
+                            Say Hello{" "}
+                          </Link>
+                          </div>
                   </div>
-                  <h3>{match.name}</h3>
-                  <div style={{ fontStyle: "italic", paddingBottom: "10px" }}>
-                    {match.aboutMe ? match.aboutMe : null}
-                  </div>
-
-                  <Link
-                    to={{
-                      pathname: "/soundbird-playlist/",
-                      state: { selectedMatch: match },
-                    }}
-                    className="btn-outline"
-                    style={{ textDecoration: "none" }}
-                  >
-                    
-                    ♩ See {match.name}'s playlist
-                  </Link>
-
-
-
-                  <Link to={{ pathname: "/messenger", state: { selectedMatch: match },}} className="btn-filled" style={{ textDecoration: "none" }}> Say Hello </Link>
-                </p>
+                </div>
               </div>
             );
           })}

@@ -14,7 +14,7 @@ function MyNav(props) {
 
         
         <Link to="/">
-        <img style={{height: "45px"}}src="/images/logo.svg"/>
+        <img style={{height: "45px"}}src="/images/Logo.svg"/>
         </Link>
                     <div className="nav-btn-container">
 

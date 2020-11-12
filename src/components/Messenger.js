@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { API_URL } from "../config";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+
 
 let socket;
 const CONNECTION_PORT = `http://localhost:5000/`;
@@ -18,12 +20,18 @@ function Messenger(props) {
   }, [CONNECTION_PORT]);
 
   useEffect(() => {
+    console.log(props.location.state)
     const { selectedMatch } = props.location.state;
     setSender(props.loggedInUser);
     setReceiver(selectedMatch);
-    setRoom(props.loggedInUser._id.concat(selectedMatch._id));
-
-    connectToRoom();
+    
+    let message = {
+      room: uuidv4(), 
+      sender: props.loggedInUser,
+      receiver: selectedMatch
+    }
+    setRoom(message.room);
+    connectToRoom(message);
   }, []);
 
   useEffect(() => {
@@ -32,8 +40,13 @@ function Messenger(props) {
     });
   });
 
-  const connectToRoom = () => {
-    socket.emit("join_room", room);
+  const connectToRoom = (message) => {
+ 
+    socket.emit("join_room", message);
+    socket.on('updateRoomId', (roomId) => {
+      setRoom(roomId);
+    })
+
   };
 
   const sendMessage = async () => {
@@ -52,6 +65,7 @@ function Messenger(props) {
   };
 
   return (
+    
     <div className="App">
       <div className="chatContainer">
         <div className="messages">

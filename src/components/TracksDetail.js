@@ -13,11 +13,13 @@ class TracksDetail extends Component {
             console.log(track);
             return (
               <div>
-                <div key={track.id} style={{ display: "flex", flexDirection: "row", paddingBottom: "40px" , borderBottom: "solid 1px grey", justifyContent:"space-between", alignItems: "center"}}>
+                <div key={track.id} style={{ display: "flex", flexDirection: "row", paddingBottom: "40px" , borderBottom: "solid 1px grey", justifyContent:"space-between", alignItems: "center", flexWrap: "wrap"}}>
                   <div style={{ width: "200px"}}>
                     <h4>{track.name}</h4>
                     <p>{track.artists[0].name}</p>
                   </div>
+
+                  <div>
                   <figure>
                     <figcaption></figcaption>
                     <audio controls src={track.preview_url}>
@@ -25,7 +27,7 @@ class TracksDetail extends Component {
                       <code>audio</code> element.
                     </audio>
                   </figure>
-
+                  </div>
                   {track.album.images.length ? (
                     <img
                       key={track.id}

@@ -64,6 +64,9 @@
    margin: 10px 0;
  }
 
+ .mini-container2{
+  margin: 10px 10px;
+}
 
  .footer {
   background: #3700b3;
@@ -195,3 +198,51 @@
   position: relative;
   align-self: center; 
 }
+
+
+
+.image2{
+  display: block;
+  width: 100%;
+}
+
+.image2:hover{
+  display: block;
+  width: 110%;
+  transition-timing-function: ease-out;
+  transition: 0.25s;
+   position: right 20px bottom 10px;
+   transition-timing-function: ease-in;
+   transition: 0.25s;
+   
+}
+
+.image-container2{
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  align-self: center; 
+}
+
+
+/* .profile-card-container{
+  margin-bottom: 20px;
+}
+
+
+
+.profile-image {
+  width: 100%;
+  position: absolute;
+  margin-top: -600px;
+}
+
+
+
+.profile-image-container{
+  overflow: hidden;
+  position: relative;
+  height: 400px
+} */
