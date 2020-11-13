@@ -197,7 +197,7 @@ https://trello.com/b/rOWAkfpp/soundbirds /// tbd
 https://github.com/alekstana/soundbirds-client/tree/master
 https://github.com/alekstana/soundbirds-server/tree/master
 
-[Deploy Link](http://heroku.com) ///tbd
+https://soundbirds.herokuapp.com/
 
 ### Slides
 
