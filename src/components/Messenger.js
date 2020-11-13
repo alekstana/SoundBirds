@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom'
 
 
 let socket;
-const CONNECTION_PORT = `http://localhost:5000/`;
+// const CONNECTION_PORT = `http://localhost:5000/`;
+const CONNECTION_PORT = `https://soundbirds.herokuapp.com/`;
 
 function Messenger(props) {
   const [room, setRoom] = useState("");

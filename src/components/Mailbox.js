@@ -35,19 +35,19 @@ function Mailbox(props) {
   
         return (
             <div>
-            {conversation && conversation.map((name) => {
+            {conversation && conversation.map((user) => {
                 return (
                     <h5>
                     
                     <Link
-                        //     to={{
-                        //       pathname: `/messenger`,
-                        //       state: { selectedMatch: match },
-                        //     }}
-                        //     className="btn-filled"
-                        //     style={{ textDecoration: "none" }}
+                            to={{
+                              pathname: `/messenger`,
+                              state: { selectedMatch: user },
+                            }}
+                            className="btn-filled"
+                            style={{ textDecoration: "none" }}
                           >
-                            <a style={{textDecoration:"underline"}}>Conversation with {name}</a>
+                            <a style={{textDecoration:"underline"}}>Conversation with {user.name}</a>
                             
                           </Link>
                           

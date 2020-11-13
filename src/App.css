@@ -178,7 +178,7 @@
 
 .btn-outline2:active:after {
   border: solid #6200EE 3px;
-  content:'added';
+  /* content:'added'; */
   background-color: #6200EE;
   border-radius: 5px;
   padding: 7px 14px;

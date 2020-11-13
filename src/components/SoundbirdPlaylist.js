@@ -161,7 +161,7 @@ class SoundbirdPlaylist extends Component {
                     onClick={() => {
                       this.handleAddToMyPlaylist(song);
                     }}
-                    className="btn-outline2"
+                    className="btn-outline"
                   >
                     add to  my playlist
                   </button>
